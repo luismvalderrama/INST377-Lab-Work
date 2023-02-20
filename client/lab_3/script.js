@@ -52,6 +52,13 @@ function moveToPrevSlide() {
     and if so, sets your slidePosition to the last slide position in totalSlides
     if not, set the slidePosition to the current position minus one
   */
+
+  if(slidePosition === slidesArray.indexOf(0)){
+    slidePosition = -3;
+   } else {
+    slidePosition -= 1; 
+   }
+
   updateSlidePosition();
 }
 
@@ -64,6 +71,13 @@ document.querySelector('.next') // Get the appropriate element (<button class="n
     console.log('clicked next'); // let's tell the client console we made it to this point in the script
     moveToNextSlide(); // call the function above to handle this
   });
+
+document.querySelector('.prev') 
+  .addEventListener('click', () => { 
+    console.log('clicked prev'); 
+    moveToPrevSlide(); 
+  });
+
 
 // Paying close attention to the above queryselector, write one that fires
 // when you want a "prev" slide
