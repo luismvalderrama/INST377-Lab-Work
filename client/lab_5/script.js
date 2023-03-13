@@ -59,6 +59,9 @@ async function mainEvent() { // the async keyword means we can make API requests
     console.log('clicked FilterButton');
 
     const formData = new FormData(mainForm);
+    const formProps = Object.fromEntries(formData);
+
+    console.log(formProps);
   })
   /*
     Now that you HAVE a list loaded, write an event listener set to your filter button
