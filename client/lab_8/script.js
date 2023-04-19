@@ -35,7 +35,6 @@ function getRandomIntInclusive(min, max) {
   async function mainEvent() {
     // the async keyword means we can make API requests
     const mainForm = document.querySelector(".main_form"); // This class name needs to be set on your form before you can listen for an event on it
-    const filterButton = document.querySelector("#filter");
     const loadDataButton = document.querySelector("#data_load");
     const generateListButton = document.querySelector("#generate");
     const textField = document.querySelector("#resto");
@@ -44,7 +43,12 @@ function getRandomIntInclusive(min, max) {
     loadAnimation.style.display = "none";
     generateListButton.classList.add("hidden");
   
-    let storedList = [];
+    const storedData = localStorage.getItem('storedData'); 
+    const parsedData = JSON.parse(storedData);
+    if (parsedData.length > 0) {
+        generateListButton.classList.remove("hidden");
+      }
+
     let currentList = []; // this is "scoped" to the main event function
   
     /* We need to listen to an "event" to have something happen in our page - here we're listening for a "submit" */
@@ -62,25 +66,10 @@ function getRandomIntInclusive(min, max) {
   
       // This changes the response from the GET into data we can use - an "object"
       storedList = await results.json();
-      if (storedList.length > 0) {
-        generateListButton.classList.remove("hidden");
-      }
+      localStorage.setItem('storedData', JSON.stringify(storedList));
   
       loadAnimation.style.play = "none";
-      console.table(storedList);
-    });
-  
-    filterButton.addEventListener("click", (event) => {
-      console.log("clicked FilterButton");
-  
-      const formData = new FormData(mainForm);
-      const formProps = Object.fromEntries(formData);
-  
-      console.log(formProps);
-      const newList = filterList(currentList, formProps.resto);
-      injectHTML(newList);
-  
-      console.log(newList);
+      // console.table(storedList);
     });
   
     generateListButton.addEventListener("click", (event) => {
