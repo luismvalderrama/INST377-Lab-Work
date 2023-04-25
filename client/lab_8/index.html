@@ -24,6 +24,7 @@
           <h3>Form Inputs</h3>
           <form action="https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json" class="box main_form">
             <button type="button" id="data_load">Load County Data</button>
+            <button type="button" id="data_load">Clear County Data</button>
           <div>
             <label for="resto">Filter by Restaurant Name</label>
             <input type="text" id="resto" name="resto" />
@@ -33,6 +34,7 @@
         </div>
         <div class="right_section box">
           <h3>Local Restaurants List</h3>
+          <div id="map"></div>
           <ol class="box" id="restaurant_list">
             A list of local restaurants
             <div class="lds-ellipsis" id="data_load_animation"><div></div><div></div><div></div><div></div></div>
